@@ -1,3 +1,4 @@
+[![Java CI with gradle](https://github.com/Daria-17/webtech-backend/actions/workflows/gradle.yml/badge.svg)](https://github.com/Daria-17/webtech-backend/actions/workflows/gradle.yml)
 # webtech-backend
 Web-Technologien Projekt
 
