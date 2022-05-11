@@ -1,14 +1,15 @@
 package de.htw.webtechdemo.web;
 
 import de.htw.webtechdemo.web.api.User;
+import de.htw.webtechdemo.web.api.UserCreateRequest;
 import de.htw.webtechdemo.web.service.UserService;
 import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,4 +27,12 @@ public class UserRestController {
     public ResponseEntity<List<User>> fetchUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
+
+    @PostMapping(path = "/api/v1/users")
+    public ResponseEntity<Void> createUser(@RequestBody UserCreateRequest request) throws URISyntaxException {
+      var user = userService.create(request);
+      URI uri = new URI("/api/v1/users/" + user.getId());
+      return ResponseEntity.created(uri).build();
+    }
+
 }
