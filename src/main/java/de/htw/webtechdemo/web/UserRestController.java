@@ -18,8 +18,8 @@ public class UserRestController {
 
     public UserRestController(){
         users = new ArrayList<>();
-        users.add(new User(1, "ZeroFiveOne", true));
-        users.add(new User(2, "JuliasCeasarOnlyOne", true));
+        users.add(new User(1L, "ZeroFiveOne", true));
+        users.add(new User(2L, "JuliasCeasarOnlyOne", true));
     }
 
     @GetMapping(path = "/api/v1/users")
