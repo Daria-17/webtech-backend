@@ -1,23 +1,13 @@
 package de.htw.webtechdemo.web.api;
 
-public class User {
+public class UserCreateRequest {
 
-    private long id;
     private String nickname;
     private boolean active;
 
-    public User(long id, String nickname, boolean active) {
-        this.id = id;
+    public UserCreateRequest(String nickname, boolean active) {
         this.nickname = nickname;
         this.active = active;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getNickname() {
@@ -36,5 +26,3 @@ public class User {
         this.active = active;
     }
 }
-
-
