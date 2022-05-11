@@ -1,23 +1,27 @@
-package de.htw.webtechdemo.web.api;
+package de.htw.webtechdemo.web.persistence;
 
-public class User {
+import javax.persistence.*;
 
+@Entity(name = "users")
+public class UserEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
+    @Column(name = "nickname", nullable = false)
     private String nickname;
+    @Column(name = "is_acive", nullable = false)
     private boolean active;
 
-    public User(Long id, String nickname, boolean active) {
-        this.id = id;
+    public UserEntity(String nickname, boolean active) {
         this.nickname = nickname;
         this.active = active;
     }
 
+    protected UserEntity(){}
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getNickname() {
@@ -36,5 +40,3 @@ public class User {
         this.active = active;
     }
 }
-
-
