@@ -1,6 +1,7 @@
 package de.htw.webtechdemo.web.service;
 
 import de.htw.webtechdemo.web.api.User;
+import de.htw.webtechdemo.web.api.UserCreateRequest;
 import de.htw.webtechdemo.web.persistence.UserEntity;
 import de.htw.webtechdemo.web.persistence.UserRepository;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,20 @@ public class UserService {
     public List<User> findAll() {
         List<UserEntity> users = userRepository.findAll();
         return users.stream()
-                .map(userEntity -> new User(
-                        userEntity.getId(),
-                        userEntity.getNickname(),
-                        userEntity.isActive()
-                )).collect(Collectors.toList());
+                .map(this::transformEntity).collect(Collectors.toList());
+    }
+
+    public User create(UserCreateRequest request) {
+        var userEntity = new UserEntity(request.getNickname(), request.isActive());
+        userRepository.save(userEntity);
+        return transformEntity(userEntity);
+    }
+
+    private User transformEntity(UserEntity userEntity) {
+        return new User(
+                userEntity.getId(),
+                userEntity.getNickname(),
+                userEntity.isActive()
+        );
     }
 }
