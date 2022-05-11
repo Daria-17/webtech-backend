@@ -1,6 +1,7 @@
 package de.htw.webtechdemo.web;
 
 import de.htw.webtechdemo.web.api.User;
+import de.htw.webtechdemo.web.service.UserService;
 import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,17 +15,15 @@ import java.util.List;
 @RestController
 public class UserRestController {
 
-    private List<User> users;
+  private final UserService userService;
 
-    public UserRestController(){
-        users = new ArrayList<>();
-        users.add(new User(1L, "ZeroFiveOne", true));
-        users.add(new User(2L, "JuliasCeasarOnlyOne", true));
+    public UserRestController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping(path = "/api/v1/users")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<User> fetchUsers() {
-        return users;
+    public ResponseEntity<List<User>> fetchUsers() {
+        return ResponseEntity.ok(userService.findAll());
     }
 }
