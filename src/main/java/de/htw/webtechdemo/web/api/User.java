@@ -2,7 +2,7 @@ package de.htw.webtechdemo.web.api;
 
 public class User {
 
-    private long id;
+    private Long id;
     private String nickname;
     private boolean active;
 

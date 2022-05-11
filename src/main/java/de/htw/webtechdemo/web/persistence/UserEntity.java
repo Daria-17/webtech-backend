@@ -8,7 +8,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
     @Column(name = "nickname", nullable = false)
     private String nickname;
     @Column(name = "is_acive", nullable = false)
