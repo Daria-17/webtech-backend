@@ -1,11 +1,11 @@
 package de.htw.webtechdemo.web.api;
 
-public class UserCreateRequest {
+public class UserManipulationRequest {
 
     private String nickname;
     private boolean active;
 
-    public UserCreateRequest(String nickname, boolean active) {
+    public UserManipulationRequest(String nickname, boolean active) {
         this.nickname = nickname;
         this.active = active;
     }

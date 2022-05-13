@@ -1,7 +1,7 @@
 package de.htw.webtechdemo.web.service;
 
 import de.htw.webtechdemo.web.api.User;
-import de.htw.webtechdemo.web.api.UserCreateRequest;
+import de.htw.webtechdemo.web.api.UserManipulationRequest;
 import de.htw.webtechdemo.web.persistence.UserEntity;
 import de.htw.webtechdemo.web.persistence.UserRepository;
 import org.springframework.stereotype.Service;
@@ -28,13 +28,25 @@ public class UserService {
         var userEntity = userRepository.findById(id);
         return userEntity.isPresent()? transformEntity(userEntity.get()) : null;
 
-
     }
 
-    public User create(UserCreateRequest request) {
+    public User create(UserManipulationRequest request) {
         var userEntity = new UserEntity(request.getNickname(), request.isActive());
         userRepository.save(userEntity);
         return transformEntity(userEntity);
+    }
+
+    public User update(Long id, UserManipulationRequest request){
+        var userEntityOptional = userRepository.findById(id);
+        if(userEntityOptional.isEmpty()){
+            return null;
+        }
+        var userEntity = userEntityOptional.get();
+        userEntity.setNickname(request.getNickname());
+        userEntity.setActive(request.isActive());
+        userEntity = userRepository.save(userEntity);
+        return transformEntity(userEntity);
+
     }
 
     private User transformEntity(UserEntity userEntity) {
