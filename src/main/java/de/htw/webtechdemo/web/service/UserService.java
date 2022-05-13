@@ -48,6 +48,13 @@ public class UserService {
         return transformEntity(userEntity);
 
     }
+    public boolean deleteById (Long id){
+        if(!userRepository.existsById(id)){
+            return false;
+        }
+        userRepository.deleteById(id);
+        return true;
+    }
 
     private User transformEntity(UserEntity userEntity) {
         return new User(

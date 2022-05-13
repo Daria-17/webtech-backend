@@ -46,5 +46,13 @@ public class UserRestController {
         return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
 
     }
+    @DeleteMapping(path = "/api/v1/users{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long id){
+        boolean successful = userService.deleteById(id);
+        return successful? ResponseEntity.ok().build(): ResponseEntity.notFound().build();
+    }
 
-}
+
+
+
+    }
