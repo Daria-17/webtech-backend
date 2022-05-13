@@ -1,4 +1,4 @@
-package de.htw.webtechdemo.web.persistence;
+package de.htw.webtechdemo.persistence;
 
 import javax.persistence.*;
 
@@ -9,18 +9,21 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "nickname", nullable = false)
     private String nickname;
-    @Column(name = "is_acive", nullable = false)
-    private boolean active;
 
-    public UserEntity(String nickname, boolean active) {
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+
+    public UserEntity(String nickname, Boolean active) {
         this.nickname = nickname;
         this.active = active;
     }
 
     protected UserEntity(){}
-    public long getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -32,11 +35,12 @@ public class UserEntity {
         this.nickname = nickname;
     }
 
-    public boolean isActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 }
+

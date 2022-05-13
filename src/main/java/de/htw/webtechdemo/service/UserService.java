@@ -1,9 +1,9 @@
-package de.htw.webtechdemo.web.service;
+package de.htw.webtechdemo.service;
 
+import de.htw.webtechdemo.persistence.UserEntity;
+import de.htw.webtechdemo.persistence.UserRepository;
 import de.htw.webtechdemo.web.api.User;
 import de.htw.webtechdemo.web.api.UserManipulationRequest;
-import de.htw.webtechdemo.web.persistence.UserEntity;
-import de.htw.webtechdemo.web.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,13 +26,13 @@ public class UserService {
 
     public User findById(Long id){
         var userEntity = userRepository.findById(id);
-        return userEntity.isPresent()? transformEntity(userEntity.get()) : null;
+        return userEntity.map(this::transformEntity).orElse(null);
 
     }
 
     public User create(UserManipulationRequest request) {
         var userEntity = new UserEntity(request.getNickname(), request.isActive());
-        userRepository.save(userEntity);
+        userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
     }
 
@@ -60,7 +60,7 @@ public class UserService {
         return new User(
                 userEntity.getId(),
                 userEntity.getNickname(),
-                userEntity.isActive()
+                userEntity.getActive()
         );
     }
 }

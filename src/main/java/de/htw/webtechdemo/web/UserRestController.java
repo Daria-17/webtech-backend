@@ -2,7 +2,7 @@ package de.htw.webtechdemo.web;
 
 import de.htw.webtechdemo.web.api.User;
 import de.htw.webtechdemo.web.api.UserManipulationRequest;
-import de.htw.webtechdemo.web.service.UserService;
+import de.htw.webtechdemo.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +40,13 @@ public class UserRestController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping(path = "/api/v1/users{id}")
+    @PutMapping(path = "/api/v1/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserManipulationRequest request){
         var user = userService.update(id, request);
         return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
 
     }
-    @DeleteMapping(path = "/api/v1/users{id}")
+    @DeleteMapping(path = "/api/v1/users/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable Long id){
         boolean successful = userService.deleteById(id);
         return successful? ResponseEntity.ok().build(): ResponseEntity.notFound().build();
