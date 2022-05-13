@@ -24,6 +24,13 @@ public class UserService {
                 .map(this::transformEntity).collect(Collectors.toList());
     }
 
+    public User findById(Long id){
+        var userEntity = userRepository.findById(id);
+        return userEntity.isPresent()? transformEntity(userEntity.get()) : null;
+
+
+    }
+
     public User create(UserCreateRequest request) {
         var userEntity = new UserEntity(request.getNickname(), request.isActive());
         userRepository.save(userEntity);

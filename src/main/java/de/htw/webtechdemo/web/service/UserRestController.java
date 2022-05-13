@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class UserRestController {
 
-  private final UserService userService;
+    private final UserService userService;
 
     public UserRestController(UserService userService) {
         this.userService = userService;
@@ -28,11 +28,18 @@ public class UserRestController {
         return ResponseEntity.ok(userService.findAll());
     }
 
+    @GetMapping(path = "/api/v1/users/{id}")
+    public ResponseEntity<User> fetchUserById(@PathVariable Long id){
+        var user = userService.findById(id);
+        return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+
+    }
+
     @PostMapping(path = "/api/v1/users")
     public ResponseEntity<Void> createUser(@RequestBody UserCreateRequest request) throws URISyntaxException {
-      var user = userService.create(request);
-      URI uri = new URI("/api/v1/users/" + user.getId());
-      return ResponseEntity.created(uri).build();
+        var user = userService.create(request);
+        URI uri = new URI("/api/v1/users/" + user.getId());
+        return ResponseEntity.created(uri).build();
     }
 
 }
