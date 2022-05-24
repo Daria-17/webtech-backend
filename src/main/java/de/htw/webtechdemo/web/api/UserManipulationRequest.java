@@ -10,6 +10,8 @@ public class UserManipulationRequest {
         this.active = active;
     }
 
+    public UserManipulationRequest() {}
+
     public String getNickname() {
         return nickname;
     }
