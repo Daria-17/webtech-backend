@@ -15,6 +15,8 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.7'
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.7'
+    implementation 'org.projectlombok:lombok:1.18.20'
+	implementation 'org.projectlombok:lombok:1.18.20'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools:2.6.7'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
 	runtimeOnly 'org.postgresql:postgresql:42.3.4'

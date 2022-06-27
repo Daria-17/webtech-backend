@@ -4,13 +4,20 @@ public class User {
 
     private long id;
     private String nickname;
+    private String lastname;
+    private String name;
+    private String aboutMe;
     private boolean active;
 
-    public User(long id, String nickname, boolean active) {
-        this.id = id;
+    public User(Long id, String nickname, int age, Boolean active, String lastname, String name, String aboutMe) {
         this.nickname = nickname;
         this.active = active;
+        this.lastname = lastname;
+        this.name = name;
+        this.aboutMe = aboutMe;
     }
+
+
 
     public long getId() {
         return id;
@@ -28,6 +35,30 @@ public class User {
         this.nickname = nickname;
     }
 
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
     public boolean isActive() {
         return active;
     }
@@ -35,6 +66,9 @@ public class User {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+
+
 }
 
 
