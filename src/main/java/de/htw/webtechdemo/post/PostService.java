@@ -16,10 +16,8 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private TopicService topicService;
 
     public PostService(PostRepository postRepository){
@@ -39,6 +37,7 @@ public class PostService {
 
     public Set<Post> findAllByOrderByCreationDateDesc(){
         Set<PostEntity> posts = postRepository.findAllByOrderByCreationDateDesc();
+
         return posts.stream()
                 .map(this::transformEntity).collect(Collectors.toSet());
     }

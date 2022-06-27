@@ -1,19 +1,30 @@
 package de.htw.webtechdemo.section;
 
-public class Section {
+import javax.persistence.*;
 
+@Entity(name = "sections")
+public class SectionEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="id")
     private Long id;
+
+    @Column(length = 50, name = "name")
     private String name;
+
+    @Column(length = 150, name = "description")
     private String description;
 
-    public Section() {
-    }
 
-    public Section(Long id, String name, String description) {
-        this.id = id;
+    public SectionEntity(String name, String description){
         this.name = name;
         this.description = description;
+
     }
+    protected SectionEntity() {
+    }
+
 
     public Long getId() {
         return id;
@@ -38,4 +49,6 @@ public class Section {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
+

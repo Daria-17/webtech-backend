@@ -1,27 +1,18 @@
 package de.htw.webtechdemo.section;
 
-public class Section {
+public class SectionManipulationRequest {
 
-    private Long id;
     private String name;
     private String description;
 
-    public Section() {
+    protected SectionManipulationRequest() {
     }
 
-    public Section(Long id, String name, String description) {
-        this.id = id;
+    public SectionManipulationRequest(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -38,4 +29,5 @@ public class Section {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
