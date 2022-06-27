@@ -11,16 +11,16 @@ public class PostEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "postId")
+    @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private Topic topic;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private User user;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id", referencedColumnName = "id")
+//    private Topic topic;
+//
+////    @ManyToOne(cascade = CascadeType.ALL)
+////    @JoinColumn(name = "id", referencedColumnName = "id")
+//    private User user;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -49,21 +49,21 @@ public class PostEntity {
         return id;
     }
 
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public Topic getTopic() {
+//        return topic;
+//    }
+//
+//    public void setTopic(Topic topic) {
+//        this.topic = topic;
+//    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public String getContent() {
         return content;

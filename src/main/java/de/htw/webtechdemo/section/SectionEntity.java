@@ -7,13 +7,12 @@ public class SectionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
     private Long id;
 
-    @Column(length = 50, name = "name")
+    @Column(length = 50)
     private String name;
 
-    @Column(length = 150, name = "description")
+    @Column(length = 150)
     private String description;
 
 
