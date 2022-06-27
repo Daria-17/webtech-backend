@@ -13,13 +13,13 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.7'
-	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.7'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools:2.6.7'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
-	runtimeOnly 'org.postgresql:postgresql:42.3.4'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.7'
-	testImplementation 'com.h2database:h2:1.4.200'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.7.0'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.0'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools:2.7.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
+	runtimeOnly 'org.postgresql:postgresql:42.3.6'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
+	testImplementation 'com.h2database:h2:2.1.212'
 }
 
 tasks.named('test') {

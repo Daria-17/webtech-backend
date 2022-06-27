@@ -1,8 +1,5 @@
-package de.htw.webtechdemo.web;
+package de.htw.webtechdemo.user;
 
-import de.htw.webtechdemo.web.api.User;
-import de.htw.webtechdemo.web.api.UserManipulationRequest;
-import de.htw.webtechdemo.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

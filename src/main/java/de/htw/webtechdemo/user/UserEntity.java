@@ -1,4 +1,4 @@
-package de.htw.webtechdemo.persistence;
+package de.htw.webtechdemo.user;
 
 import javax.persistence.*;
 

@@ -1,9 +1,5 @@
-package de.htw.webtechdemo.service;
+package de.htw.webtechdemo.user;
 
-import de.htw.webtechdemo.persistence.UserEntity;
-import de.htw.webtechdemo.persistence.UserRepository;
-import de.htw.webtechdemo.web.api.User;
-import de.htw.webtechdemo.web.api.UserManipulationRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

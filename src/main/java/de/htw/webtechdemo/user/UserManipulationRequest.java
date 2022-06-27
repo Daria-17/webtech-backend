@@ -1,4 +1,4 @@
-package de.htw.webtechdemo.web.api;
+package de.htw.webtechdemo.user;
 
 public class UserManipulationRequest {
 
