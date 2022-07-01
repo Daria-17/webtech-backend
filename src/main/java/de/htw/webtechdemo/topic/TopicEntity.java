@@ -1,7 +1,9 @@
 package de.htw.webtechdemo.topic;
 
 import de.htw.webtechdemo.section.Section;
+import de.htw.webtechdemo.section.SectionEntity;
 import de.htw.webtechdemo.user.User;
+import de.htw.webtechdemo.user.UserEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,15 +16,13 @@ public class TopicEntity {
     @Column(name = "id")
     private Long id;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id", referencedColumnName = "id")
-//    @Column(name = "users" )
-//    private User user;
-//
-////    @ManyToOne(cascade = CascadeType.ALL)
-////    @JoinColumn(name = "id", referencedColumnName = "id")
-//    @Column(name = "section")
-//    private Section section;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private UserEntity user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private SectionEntity section;
 
     @Column(length = 80, name = "title")
     private String title;

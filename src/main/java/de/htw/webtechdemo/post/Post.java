@@ -1,7 +1,9 @@
 package de.htw.webtechdemo.post;
 
 import de.htw.webtechdemo.topic.Topic;
+import de.htw.webtechdemo.topic.TopicEntity;
 import de.htw.webtechdemo.user.User;
+import de.htw.webtechdemo.user.UserEntity;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -15,7 +17,7 @@ public class Post {
     private LocalDate creationDate;
     private LocalDate lastUpdateDate;
 
-    public Post(Long id, Topic topic, User user, String content, LocalDate creationDate, LocalDate lastUpdateDate) {
+    public Post(Long id, TopicEntity topic, UserEntity user, String content, LocalDate creationDate, LocalDate lastUpdateDate) {
         this.id = id;
         this.topic = topic;
         this.user = user;

@@ -16,8 +16,10 @@ public class PostService {
 
     private final PostRepository postRepository;
 
+    @Autowired
     private UserService userService;
 
+    @Autowired
     private TopicService topicService;
 
     public PostService(PostRepository postRepository){
@@ -75,8 +77,8 @@ public class PostService {
     private Post transformEntity(PostEntity postEntity){
         return new Post(
                 postEntity.getId(),
-                postEntity.getTopic(),
-                postEntity.getUser(),
+                postEntity.getTopicEntity(),
+                postEntity.getUserEntity(),
                 postEntity.getContent(),
                 postEntity.getCreationDate(),
                 postEntity.getLastUpdateDate());

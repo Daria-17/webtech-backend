@@ -1,7 +1,9 @@
 package de.htw.webtechdemo.post;
 
 import de.htw.webtechdemo.topic.Topic;
+import de.htw.webtechdemo.topic.TopicEntity;
 import de.htw.webtechdemo.user.User;
+import de.htw.webtechdemo.user.UserEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,13 +16,13 @@ public class PostEntity {
     @Column(name = "id")
     private Long id;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id", referencedColumnName = "id")
-//    private Topic topic;
-//
-////    @ManyToOne(cascade = CascadeType.ALL)
-////    @JoinColumn(name = "id", referencedColumnName = "id")
-//    private User user;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private TopicEntity topic;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private UserEntity user;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -49,21 +51,21 @@ public class PostEntity {
         return id;
     }
 
-//    public Topic getTopic() {
-//        return topic;
-//    }
-//
-//    public void setTopic(Topic topic) {
-//        this.topic = topic;
-//    }
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public TopicEntity getTopicEntity() {
+        return topic;
+    }
+
+    public void setTopicEntity(TopicEntity topic) {
+        this.topic = topic;
+    }
+
+    public UserEntity getUserEntity() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 
     public String getContent() {
         return content;
