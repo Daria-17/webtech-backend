@@ -1,36 +1,28 @@
 package de.htw.webtechdemo.section;
 
 import de.htw.webtechdemo.topic.Topic;
-import de.htw.webtechdemo.topic.TopicEntity;
 import de.htw.webtechdemo.topic.TopicService;
 import de.htw.webtechdemo.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
 @RestController
-@RequestMapping("api/v1/selections")
+@RequestMapping("api/v1/sections")
 public class SelectionRestController {
 
-    private final SectionService sectionService;
+    private  SectionService sectionService;
 
-    public SelectionRestController(SectionService sectionService) {
-        this.sectionService = sectionService;
-    }
-
-    @Autowired
     private TopicService topicService;
 
-    @Autowired
     private UserService userService;
 
     @GetMapping("")

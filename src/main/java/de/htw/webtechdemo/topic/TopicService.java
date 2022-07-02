@@ -5,29 +5,24 @@ import de.htw.webtechdemo.section.SectionService;
 import de.htw.webtechdemo.user.User;
 import de.htw.webtechdemo.user.UserRepository;
 import de.htw.webtechdemo.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+@AllArgsConstructor
 @Service
 public class TopicService {
 
-    @Autowired
     private TopicRepository topicRepository;
 
-    @Autowired
     private SectionService sectionService;
 
-    @Autowired
     private SectionRepository sectionRepository;
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private UserRepository userRepository;
 
 
@@ -54,7 +49,6 @@ public class TopicService {
     }
 
     public Topic save(TopicManipulationRequest request) {
-
 
         var topicEntity = new TopicEntity(
                 userRepository.getById(request.getUser().getId()),

@@ -1,11 +1,10 @@
-package de.htw.webtechdemo.user;
+package de.htw.webtechdemo.registration;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode
 @ToString
 public class RegistrationRequest {
 

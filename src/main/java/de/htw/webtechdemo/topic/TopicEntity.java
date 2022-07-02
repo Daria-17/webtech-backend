@@ -1,8 +1,6 @@
 package de.htw.webtechdemo.topic;
 
-import de.htw.webtechdemo.section.Section;
 import de.htw.webtechdemo.section.SectionEntity;
-import de.htw.webtechdemo.user.User;
 import de.htw.webtechdemo.user.UserEntity;
 import lombok.Getter;
 import lombok.Setter;

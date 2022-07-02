@@ -1,4 +1,4 @@
-package de.htw.webtechdemo.user;
+package de.htw.webtechdemo.registration;
 
 import org.springframework.stereotype.Service;
 
@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class RegistrationService {
 
     public String register(RegistrationRequest request) {
-        return "works";
+        return "it works";
     }
 }
