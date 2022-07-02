@@ -67,6 +67,7 @@ public class UserService {
                 userEntity.isActive(),
                 userEntity.getLastname(),
                 userEntity.getName(),
+                userEntity.getGender(),
                 userEntity.getAboutMe()
 
         );

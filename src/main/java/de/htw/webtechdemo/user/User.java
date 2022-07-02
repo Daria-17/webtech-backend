@@ -1,20 +1,29 @@
 package de.htw.webtechdemo.user;
 
+import java.util.List;
+
 public class User {
 
     private long id;
+    private int age;
     private String nickname;
     private String lastname;
     private String name;
     private String aboutMe;
     private boolean active;
+    private Gender gender;
 
-    public User(Long id, String nickname, int age, Boolean active, String lastname, String name, String aboutMe) {
+
+    public User(Long id, String nickname, int age, Boolean active, String lastname, String name, Gender gender,
+                String aboutMe) {
         this.nickname = nickname;
+        this.age = age;
         this.active = active;
         this.lastname = lastname;
         this.name = name;
+        this.gender = gender;
         this.aboutMe = aboutMe;
+
     }
 
 
@@ -67,8 +76,13 @@ public class User {
         this.active = active;
     }
 
+    public Gender getGender() { return gender; }
 
+    public void setGender(Gender gender) { this.gender = gender; }
 
+    public void setAge(int age) { this.age = age; }
+
+    public int getAge() { return age; }
 }
 
 

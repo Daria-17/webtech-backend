@@ -33,7 +33,8 @@ public class UserEntity {
 
 
 
-    public UserEntity(String nickname, int age, String name, String lastname, boolean active, Gender gender, String aboutMe) {
+    public UserEntity(String nickname, int age, Boolean active, String lastname, String name, Gender gender, 
+                      String aboutMe) {
         this.nickname = nickname;
         this.age = age;
         this.active = active;
@@ -45,6 +46,9 @@ public class UserEntity {
 
     protected UserEntity(){
 
+    }
+
+    public UserEntity(String nickname, int age, String name, String lastname, boolean active, Gender gender, String aboutMe) {
     }
 
     public Long getId() {

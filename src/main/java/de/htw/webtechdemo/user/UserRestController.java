@@ -18,18 +18,6 @@ public class UserRestController {
         this.userService = userService;
     }
 
-//    private List<User> users;
-//    public UserRestController(){
-//        users = new ArrayList<>();
-//        users.add(new User(1L, "number1", true, "Mueller", "Max", "this text is about me"));
-//    }
-//    @GetMapping(path = "/api/v1/users")
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public List<User> fetchUsers(){
-//        return users;
-//    }
-
-
 
     @GetMapping(path = "/api/v1/users")
     @ResponseStatus(code = HttpStatus.OK)
