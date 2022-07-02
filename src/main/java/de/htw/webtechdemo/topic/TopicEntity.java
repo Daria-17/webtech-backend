@@ -1,8 +1,6 @@
 package de.htw.webtechdemo.topic;
 
-import de.htw.webtechdemo.section.Section;
 import de.htw.webtechdemo.section.SectionEntity;
-import de.htw.webtechdemo.user.User;
 import de.htw.webtechdemo.user.UserEntity;
 
 import javax.persistence.*;
@@ -39,7 +37,7 @@ public class TopicEntity {
     @Column(nullable = false, name = "active")
     private boolean active;
 
-    public TopicEntity(UserEntity userEntity, SectionEntity section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
+    public TopicEntity(UserEntity user, SectionEntity section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
         this.user = user;
         this.section = section;
         this.title = title;
