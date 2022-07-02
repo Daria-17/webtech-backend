@@ -1,6 +1,5 @@
 package de.htw.webtechdemo.topic;
 
-import de.htw.webtechdemo.section.Section;
 import de.htw.webtechdemo.section.SectionRepository;
 import de.htw.webtechdemo.section.SectionService;
 import de.htw.webtechdemo.user.User;
@@ -51,7 +50,7 @@ public class TopicService {
     }
 
     public Set<Topic> findBySection(String sectionName) {
-        Set<Topic> topics = topicRepository.findBySection(sectionService.findByName(sectionName));
+        Set<Topic> topics = topicRepository.findBySection(sectionRepository.getById(sectionRepository.findByName(sectionName).getId()));
         return topics;
     }
 
@@ -71,19 +70,19 @@ public class TopicService {
     }
 
     public Set<Topic> findBySection(Long id) {
-        Set<Topic> topics = topicRepository.findBySection(sectionService.findOne(id));
+        Set<Topic> topics = topicRepository.findBySection(sectionRepository.getById(id));
         return topics;
     }
 
     public Set<Topic> findByUser(User user) {
-        Set<Topic> topics = topicRepository.findByUser(user);
+        Set<Topic> topics = topicRepository.findByUser(userRepository.getById(user.getId()));
         return topics;
     }
 
     public void delete(Long id) {
-        delete(findOne(id));
+        topicRepository.delete(topicRepository.getById(id));
     }
-    public void delete(Topic topic) {
+    public void delete(TopicEntity topic) {
         topicRepository.delete(topic);
     }
 

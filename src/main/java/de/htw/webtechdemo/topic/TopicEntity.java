@@ -17,11 +17,11 @@ public class TopicEntity {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn
     private UserEntity user;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn
     private SectionEntity section;
 
     @Column(length = 80, name = "title")

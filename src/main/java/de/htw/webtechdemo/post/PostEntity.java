@@ -13,15 +13,15 @@ public class PostEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(insertable = false, updatable = false)
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn
     private TopicEntity topic;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn
     private UserEntity user;
 
     @Column(columnDefinition = "TEXT")
@@ -33,7 +33,15 @@ public class PostEntity {
     @Column(nullable = false)
     private LocalDate lastUpdateDate;
 
-    public PostEntity() {
+    protected PostEntity() {
+    }
+
+    public PostEntity(TopicEntity topic, UserEntity user, String content, LocalDate creationDate, LocalDate lastUpdateDate) {
+        this.topic = topic;
+        this.user = user;
+        this.content = content;
+        this.creationDate = creationDate;
+        this.lastUpdateDate = lastUpdateDate;
     }
 
     @PrePersist
