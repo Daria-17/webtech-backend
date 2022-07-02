@@ -1,7 +1,6 @@
 package de.htw.webtechdemo.section;
 
-import de.htw.webtechdemo.user.User;
-import de.htw.webtechdemo.user.UserEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +10,9 @@ import java.util.stream.Collectors;
 public class SectionService {
 
 
+    @Autowired
     private SectionRepository sectionRepository;
 
-    public SectionService(SectionRepository sectionRepository) {
-        this.sectionRepository = sectionRepository;
-    }
 
     public List<Section> findAll() {
         List<SectionEntity> sections = sectionRepository.findAll();
@@ -29,10 +26,14 @@ public class SectionService {
     }
 
     public Section findByName(String name) {
-        var sectionEntity = sectionRepository.findByName(name);
-        return sectionEntity;
+        return sectionRepository.findByName(name);
     }
 
+    public Section create(SectionManipulationRequest request) {
+        var sectionEntity = new SectionEntity(request.getName(), request.getDescription());
+        sectionEntity = sectionRepository.save(sectionEntity);
+        return transformEntity(sectionEntity);
+    }
 
     public Section save(SectionManipulationRequest request) {
         var sectionEntity = new SectionEntity(request.getName(), request.getDescription());
@@ -40,12 +41,8 @@ public class SectionService {
         return transformEntity(sectionEntity);
     }
 
-    public boolean deleteById (Long id){
-        if(!sectionRepository.existsById(id)){
-            return false;
-        }
+    public void delete(Long id) {
         sectionRepository.deleteById(id);
-        return true;
     }
 
     public void delete(SectionEntity sectionEntity) {

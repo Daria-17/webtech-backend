@@ -54,115 +54,20 @@ public class SectionEntity {
         this.description = description;
     }
 
-        public boolean isEmpty() {
-            return false;
-        }
 
-
-        public boolean contains(Object o) {
-            return false;
-        }
-
-
-        public Iterator<Section> iterator() {
-            return null;
-        }
-
-
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-
-        public <T> T[] toArray(T[] a) {
-            return null;
-        }
-
-
-        public boolean add(Section section) {
-            return false;
-        }
-
-
-        public boolean remove(Object o) {
-            return false;
-        }
-
-
-        public boolean containsAll(Collection<?> c) {
-            return false;
-        }
-
-
-        public boolean addAll(Collection<? extends Section> c) {
-            return false;
-        }
-
-
-        public boolean addAll(int index, Collection<? extends Section> c) {
-            return false;
-        }
-
-
-        public boolean removeAll(Collection<?> c) {
-            return false;
-        }
-
-
-        public boolean retainAll(Collection<?> c) {
-            return false;
-        }
-
-
-        public void clear() {
-
-        }
-
-
-        public Section get(int index) {
-            return null;
-        }
-
-
-        public Section set(int index, Section element) {
-            return null;
-        }
-
-
-        public void add(int index, Section element) {
-
-        }
-
-
-        public Section remove(int index) {
-            return null;
-        }
-
-
-        public int indexOf(Object o) {
-            return 0;
-        }
-
-
-        public int lastIndexOf(Object o) {
-            return 0;
-        }
-
-
-        public ListIterator<Section> listIterator() {
-            return null;
-        }
-
-
-        public ListIterator<Section> listIterator(int index) {
-            return null;
-        }
-
-
-        public List<Section> subList(int fromIndex, int toIndex) {
-            return null;
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SectionEntity that = (SectionEntity) o;
+        return sections.equals(that.sections) && id.equals(that.id) && name.equals(that.name) && description.equals(that.description);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sections, id, name, description);
+    }
+}
 
 
 
