@@ -1,7 +1,9 @@
 package de.htw.webtechdemo.post;
 
 import de.htw.webtechdemo.topic.Topic;
+import de.htw.webtechdemo.topic.TopicEntity;
 import de.htw.webtechdemo.user.User;
+import de.htw.webtechdemo.user.UserEntity;
 
 import java.time.LocalDate;
 import java.util.Objects;

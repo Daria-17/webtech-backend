@@ -1,7 +1,9 @@
 package de.htw.webtechdemo.post;
 
 import de.htw.webtechdemo.topic.Topic;
+import de.htw.webtechdemo.topic.TopicEntity;
 import de.htw.webtechdemo.user.User;
+import de.htw.webtechdemo.user.UserEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,16 +13,16 @@ public class PostEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "postId")
+    @Column(insertable = false, updatable = false)
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private Topic topic;
+    @JoinColumn
+    private TopicEntity topic;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn
+    private UserEntity user;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -31,7 +33,15 @@ public class PostEntity {
     @Column(nullable = false)
     private LocalDate lastUpdateDate;
 
-    public PostEntity() {
+    protected PostEntity() {
+    }
+
+    public PostEntity(TopicEntity topic, UserEntity user, String content, LocalDate creationDate, LocalDate lastUpdateDate) {
+        this.topic = topic;
+        this.user = user;
+        this.content = content;
+        this.creationDate = creationDate;
+        this.lastUpdateDate = lastUpdateDate;
     }
 
     @PrePersist
@@ -49,19 +59,19 @@ public class PostEntity {
         return id;
     }
 
-    public Topic getTopic() {
+    public TopicEntity getTopicEntity() {
         return topic;
     }
 
-    public void setTopic(Topic topic) {
+    public void setTopicEntity(TopicEntity topic) {
         this.topic = topic;
     }
 
-    public User getUser() {
+    public UserEntity getUserEntity() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 

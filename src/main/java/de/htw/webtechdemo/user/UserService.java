@@ -59,7 +59,7 @@ public class UserService {
         return true;
     }
 
-    private User transformEntity(UserEntity userEntity) {
+    public User transformEntity(UserEntity userEntity) {
         return new User(
                 userEntity.getId(),
                 userEntity.getNickname(),

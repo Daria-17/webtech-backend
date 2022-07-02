@@ -1,19 +1,23 @@
 package de.htw.webtechdemo.section;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity(name = "sections")
 public class SectionEntity {
 
+    @ElementCollection
+    List<String> sections = new ArrayList<>();
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
     private Long id;
 
-    @Column(length = 50, name = "name")
+    @Column(length = 50)
     private String name;
 
-    @Column(length = 150, name = "description")
+    @Column(length = 150)
     private String description;
 
 
@@ -50,5 +54,21 @@ public class SectionEntity {
         this.description = description;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SectionEntity that = (SectionEntity) o;
+        return sections.equals(that.sections) && id.equals(that.id) && name.equals(that.name) && description.equals(that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sections, id, name, description);
+    }
 }
+
+
+
 
