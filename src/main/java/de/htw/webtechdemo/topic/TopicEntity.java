@@ -1,11 +1,16 @@
 package de.htw.webtechdemo.topic;
 
 import de.htw.webtechdemo.section.Section;
+import de.htw.webtechdemo.section.SectionEntity;
 import de.htw.webtechdemo.user.User;
+import de.htw.webtechdemo.user.UserEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
+@Getter
+@Setter
 @Entity(name = "topics")
 public class TopicEntity {
 
@@ -17,12 +22,12 @@ public class TopicEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "users")
     @Column(name = "user")
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", referencedColumnName = "id")
     @Column(name = "section")
-    private Section section;
+    private SectionEntity section;
 
     @Column(length = 80, name = "title")
     private String title;
@@ -39,7 +44,7 @@ public class TopicEntity {
     @Column(nullable = false, name = "active")
     private boolean active;
 
-    public TopicEntity(User user, Section section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
+    public TopicEntity(UserEntity user, SectionEntity section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
         this.user = user;
         this.section = section;
         this.title = title;
@@ -50,64 +55,4 @@ public class TopicEntity {
     }
 
     protected TopicEntity () {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Section getSection() {
-        return section;
-    }
-
-    public void setSection(Section section) {
-        this.section = section;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public LocalDate getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(LocalDate lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }

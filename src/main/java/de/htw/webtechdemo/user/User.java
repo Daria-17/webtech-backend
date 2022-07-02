@@ -30,6 +30,7 @@ public class User implements UserDetails {
     private Boolean enabled;
 
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
