@@ -1,39 +1,70 @@
 package de.htw.webtechdemo.user;
 
-public class User {
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+public class User implements UserDetails {
 
     private long id;
-    private String nickname;
+    private String firstName;
+    private String lastName;
+    private LocalDate dob;
+    private String username;
+    private String email;
+    private String password;
+    private UserRole userRole;
+    private LocalDate creationDate;
     private boolean active;
+    private Boolean locked;
+    private Boolean enabled;
 
-    public User(long id, String nickname, boolean active) {
-        this.id = id;
-        this.nickname = nickname;
-        this.active = active;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority =
+                new SimpleGrantedAuthority(userRole.name());
+        return Collections.singletonList(authority);
     }
 
-    public long getId() {
-        return id;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public boolean isActive() {
+    @Override
+    public boolean isAccountNonExpired() {
         return active;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return active;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }
 

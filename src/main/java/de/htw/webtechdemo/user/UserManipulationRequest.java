@@ -1,30 +1,27 @@
 package de.htw.webtechdemo.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class UserManipulationRequest {
 
-    private String nickname;
+    private String firstName;
+    private String lastName;
+    private LocalDate dob;
+    private String username;
+    private String email;
+    private String password;
+    private UserRole userRole;
+    private LocalDate creationDate;
     private boolean active;
+    private Boolean locked;
+    private Boolean enabled;
 
-    public UserManipulationRequest(String nickname, boolean active) {
-        this.nickname = nickname;
-        this.active = active;
-    }
 
-    public UserManipulationRequest() {}
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }
