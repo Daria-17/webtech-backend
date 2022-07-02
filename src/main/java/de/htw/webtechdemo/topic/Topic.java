@@ -17,7 +17,8 @@ public class Topic {
     private LocalDate lastUpdateDate;
     private boolean active;
 
-    public Topic(User user, Section section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
+    public Topic(Long id, User user, Section section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
+        this.id = id;
         this.user = user;
         this.section = section;
         this.title = title;

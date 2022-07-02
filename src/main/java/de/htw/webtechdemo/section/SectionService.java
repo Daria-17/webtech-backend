@@ -52,7 +52,7 @@ public class SectionService {
         sectionRepository.delete(sectionEntity);
     }
 
-    private Section transformEntity(SectionEntity sectionEntity) {
+    public Section transformEntity(SectionEntity sectionEntity) {
         return new Section(
                 sectionEntity.getId(),
                 sectionEntity.getName(),

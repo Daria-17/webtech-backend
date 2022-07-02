@@ -77,8 +77,8 @@ public class PostService {
     private Post transformEntity(PostEntity postEntity){
         return new Post(
                 postEntity.getId(),
-                postEntity.getTopicEntity(),
-                postEntity.getUserEntity(),
+                topicService.transformEntity(postEntity.getTopicEntity()),
+                userService.transformEntity(postEntity.getUserEntity()),
                 postEntity.getContent(),
                 postEntity.getCreationDate(),
                 postEntity.getLastUpdateDate());

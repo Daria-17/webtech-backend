@@ -1,7 +1,11 @@
 package de.htw.webtechdemo.topic;
 
+import de.htw.webtechdemo.section.Section;
+import de.htw.webtechdemo.section.SectionRepository;
 import de.htw.webtechdemo.section.SectionService;
 import de.htw.webtechdemo.user.User;
+import de.htw.webtechdemo.user.UserRepository;
+import de.htw.webtechdemo.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,15 @@ public class TopicService {
 
     @Autowired
     private SectionService sectionService;
+
+    @Autowired
+    private SectionRepository sectionRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public TopicService(TopicRepository topicRepository) {
         this.topicRepository = topicRepository;
@@ -43,9 +56,11 @@ public class TopicService {
     }
 
     public Topic save(TopicManipulationRequest request) {
+
+
         var topicEntity = new TopicEntity(
-                request.getUser(),
-                request.getSection(),
+                userRepository.getById(request.getUser().getId()),
+                sectionRepository.getById(request.getSection().getId()),
                 request.getTitle(),
                 request.getContent(),
                 request.getCreationDate(),
@@ -72,10 +87,11 @@ public class TopicService {
         topicRepository.delete(topic);
     }
 
-    private Topic transformEntity(TopicEntity topicEntity){
+    public Topic transformEntity(TopicEntity topicEntity){
         return new Topic(
-                topicEntity.getUser(),
-                topicEntity.getSection(),
+                topicEntity.getId(),
+                userService.transformEntity(topicEntity.getUser()),
+                sectionService.transformEntity(topicEntity.getSection()),
                 topicEntity.getTitle(),
                 topicEntity.getContent(),
                 topicEntity.getCreationDate(),

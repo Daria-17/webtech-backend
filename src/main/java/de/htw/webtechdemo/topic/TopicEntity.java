@@ -39,15 +39,15 @@ public class TopicEntity {
     @Column(nullable = false, name = "active")
     private boolean active;
 
-//    public TopicEntity(User user, Section section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
-//        this.user = user;
-//        this.section = section;
-//        this.title = title;
-//        this.content = content;
-//        this.creationDate = creationDate;
-//        this.lastUpdateDate = lastUpdateDate;
-//        this.active = active;
-//    }
+    public TopicEntity(UserEntity userEntity, SectionEntity section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
+        this.user = user;
+        this.section = section;
+        this.title = title;
+        this.content = content;
+        this.creationDate = creationDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.active = active;
+    }
 
     protected TopicEntity () {}
 
@@ -55,21 +55,21 @@ public class TopicEntity {
         return id;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-//
-//    public Section getSection() {
-//        return section;
-//    }
-//
-//    public void setSection(Section section) {
-//        this.section = section;
-//    }
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public SectionEntity getSection() {
+        return section;
+    }
+
+    public void setSection(SectionEntity section) {
+        this.section = section;
+    }
 
     public String getTitle() {
         return title;
