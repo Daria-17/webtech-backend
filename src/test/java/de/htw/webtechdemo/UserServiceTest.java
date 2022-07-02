@@ -38,7 +38,7 @@ public class UserServiceTest implements WithAssertions {
     }
 
     @Test
-    @DisplayName("should return false if user to delete does not exist")
+    @DisplayName("should return false if user to delete doesn't exist")
     void should_return_false_if_user_to_delete_does_not_exist() {
         Long givenId = 125L;
         doReturn(false).when(repository).existsById(givenId);
