@@ -6,3 +6,4 @@ public interface SectionRepository extends JpaRepository<SectionEntity, Long> {
     Section findByName(String name);
 
 }
+

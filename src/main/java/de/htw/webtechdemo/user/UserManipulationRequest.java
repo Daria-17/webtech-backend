@@ -1,7 +1,5 @@
 package de.htw.webtechdemo.user;
 
-import de.htw.webtechdemo.persistence.Gender;
-
 public class UserManipulationRequest {
 
     private long id;

@@ -18,7 +18,7 @@ public class UserEntity {
 
     @Column(name = "(lastname, ", nullable = false)
     private String lastname;
-//
+
     @Column(name = "(name, ", nullable = false)
     private String name;
 
@@ -31,11 +31,9 @@ public class UserEntity {
     @Column(length = 150)
     private String aboutMe;
 
-    //private Rolle rolle;
 
 
-    public UserEntity(Long id, String nickname, int age, String name, String lastname, boolean active, Gender gender, String aboutMe) {
-        this.id = id;
+    public UserEntity(String nickname, int age, String name, String lastname, boolean active, Gender gender, String aboutMe) {
         this.nickname = nickname;
         this.age = age;
         this.active = active;
@@ -43,6 +41,10 @@ public class UserEntity {
         this.name = name;
         this.aboutMe = aboutMe;
         this.gender = gender;
+    }
+
+    protected UserEntity(){
+
     }
 
     public Long getId() {

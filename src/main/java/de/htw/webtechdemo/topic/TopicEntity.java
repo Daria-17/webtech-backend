@@ -1,9 +1,7 @@
 package de.htw.webtechdemo.topic;
 
 import de.htw.webtechdemo.section.Section;
-import de.htw.webtechdemo.section.SectionEntity;
 import de.htw.webtechdemo.user.User;
-import de.htw.webtechdemo.user.UserEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,12 +15,14 @@ public class TopicEntity {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private UserEntity user;
+    @JoinColumn(name = "users")
+    @Column(name = "user")
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private SectionEntity section;
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @Column(name = "section")
+    private Section section;
 
     @Column(length = 80, name = "title")
     private String title;
@@ -39,7 +39,7 @@ public class TopicEntity {
     @Column(nullable = false, name = "active")
     private boolean active;
 
-    public TopicEntity(UserEntity userEntity, SectionEntity section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
+    public TopicEntity(User user, Section section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
         this.user = user;
         this.section = section;
         this.title = title;
@@ -55,19 +55,19 @@ public class TopicEntity {
         return id;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public SectionEntity getSection() {
+    public Section getSection() {
         return section;
     }
 
-    public void setSection(SectionEntity section) {
+    public void setSection(Section section) {
         this.section = section;
     }
 

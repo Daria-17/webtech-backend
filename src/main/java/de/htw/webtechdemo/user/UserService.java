@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public User create(UserManipulationRequest request) {
-        var userEntity = new UserEntity(request.getId(), request.getNickname(), request.getAge(), request.getName(),
+        var userEntity = new UserEntity(request.getNickname(), request.getAge(), request.getName(),
                 request.getLastname(), request.isActive(), request.getGender(), request.getAboutMe());
         userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
