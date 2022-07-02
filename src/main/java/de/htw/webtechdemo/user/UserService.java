@@ -1,17 +1,25 @@
 package de.htw.webtechdemo.user;
 
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+@AllArgsConstructor
+public class UserService implements UserDetailsService {
 
+    private final static String USER_NOT_FOUND_MSG = "User with email %s not found.";
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
     public List<User> findAll() {
@@ -27,8 +35,19 @@ public class UserService {
     }
 
     public User create(UserManipulationRequest request) {
-        var userEntity = new UserEntity(request.getNickname(), request.getAge(), request.getName(),
-                request.getLastname(), request.isActive(), request.getGender(), request.getAboutMe());
+        var userEntity = new UserEntity(
+                request.getFirstName(),
+                request.getLastName(),
+                request.getDob(),
+                request.getUsername(),
+                request.getEmail(),
+                request.getPassword(),
+                request.getUserRole(),
+                request.getCreationDate(),
+                request.isActive(),
+                request.getLocked(),
+                request.getEnabled()
+                );
         userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
     }
@@ -39,14 +58,16 @@ public class UserService {
             return null;
         }
         var userEntity = userEntityOptional.get();
-        userEntity.setNickname(request.getNickname());
-        userEntity.setAge(request.getAge());
+        userEntity.setFirstName(request.getFirstName());
+        userEntity.setLastName(request.getLastName());
+        userEntity.setDob(request.getDob());
+        userEntity.setUsername(request.getUsername());
+        userEntity.setEmail(request.getEmail());
+        userEntity.setPassword(request.getPassword());
+        userEntity.setUserRole(request.getUserRole());
         userEntity.setActive(request.isActive());
-        userEntity.setName(request.getName());
-        userEntity.setLastname(request.getLastname());
-        userEntity.setGender(request.getGender());
-        userEntity.setAboutMe(request.getAboutMe());
-
+        userEntity.setLocked(request.getLocked());
+        userEntity.setEnabled(request.getEnabled());
         userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
 
@@ -62,14 +83,19 @@ public class UserService {
     public User transformEntity(UserEntity userEntity) {
         return new User(
                 userEntity.getId(),
-                userEntity.getNickname(),
-                userEntity.getAge(),
+                userEntity.getFirstName(),
+                userEntity.getLastName(),
+                userEntity.getDob(),
+                userEntity.getUsername(),
+                userEntity.getEmail(),
+                userEntity.getPassword(),
+                userEntity.getUserRole(),
+                userEntity.getCreationDate(),
                 userEntity.isActive(),
-                userEntity.getLastname(),
-                userEntity.getName(),
-                userEntity.getGender(),
-                userEntity.getAboutMe()
-
+                userEntity.getLocked(),
+                userEntity.getEnabled()
         );
     }
+
+
 }

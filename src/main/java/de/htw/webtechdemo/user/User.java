@@ -1,88 +1,71 @@
 package de.htw.webtechdemo.user;
 
-import java.util.List;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class User {
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+public class User implements UserDetails {
 
     private long id;
-    private int age;
-    private String nickname;
-    private String lastname;
-    private String name;
-    private String aboutMe;
+    private String firstName;
+    private String lastName;
+    private LocalDate dob;
+    private String username;
+    private String email;
+    private String password;
+    private UserRole userRole;
+    private LocalDate creationDate;
     private boolean active;
-    private Gender gender;
+    private Boolean locked;
+    private Boolean enabled;
 
 
-    public User(Long id, String nickname, int age, Boolean active, String lastname, String name, Gender gender,
-                String aboutMe) {
-        this.nickname = nickname;
-        this.age = age;
-        this.active = active;
-        this.lastname = lastname;
-        this.name = name;
-        this.gender = gender;
-        this.aboutMe = aboutMe;
-
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority =
+                new SimpleGrantedAuthority(userRole.name());
+        return Collections.singletonList(authority);
     }
 
-
-
-    public long getId() {
-        return id;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAboutMe() {
-        return aboutMe;
-    }
-
-    public void setAboutMe(String aboutMe) {
-        this.aboutMe = aboutMe;
-    }
-
-    public boolean isActive() {
+    @Override
+    public boolean isAccountNonExpired() {
         return active;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
     }
 
-    public Gender getGender() { return gender; }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return active;
+    }
 
-    public void setGender(Gender gender) { this.gender = gender; }
-
-    public void setAge(int age) { this.age = age; }
-
-    public int getAge() { return age; }
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
 }
 
 
