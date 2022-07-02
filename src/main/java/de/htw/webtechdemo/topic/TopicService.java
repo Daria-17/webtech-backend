@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class TopicService {
 
-    private final TopicRepository topicRepository;
+    @Autowired
+    private TopicRepository topicRepository;
 
     @Autowired
     private SectionService sectionService;
@@ -29,9 +30,7 @@ public class TopicService {
     @Autowired
     private UserRepository userRepository;
 
-    public TopicService(TopicRepository topicRepository) {
-        this.topicRepository = topicRepository;
-    }
+
 
     public List<Topic> findAll() {
         List<TopicEntity> topics = topicRepository.findAll();
