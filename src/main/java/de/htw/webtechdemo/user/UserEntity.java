@@ -29,7 +29,8 @@ public class UserEntity {
     private Boolean locked;
     private Boolean enabled;
 
-    public UserEntity(String firstName, String lastName, LocalDate dob, String username, String email, String password, UserRole userRole, LocalDate creationDate, boolean active, Boolean locked, Boolean enabled) {
+    public UserEntity(String firstName, String lastName, LocalDate dob, String username, String email, String password,
+                      UserRole userRole, LocalDate creationDate, boolean active, Boolean locked, Boolean enabled) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;

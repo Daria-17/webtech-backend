@@ -55,7 +55,7 @@ public class SectionService {
                 sectionEntity.getName(),
                 sectionEntity.getDescription());
 
-}
+    }
 }
 
 
