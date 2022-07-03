@@ -42,36 +42,6 @@ public class UserServiceTest implements WithAssertions {
         assertThat(result).isFalse();
     }
 
-//    @Test
-//    @DisplayName("should transform user to User")
-//    void should_transform_user_to_User() {
-//        var user = Mockito.mock(User.class);
-//        doReturn(1L).when(user).getId();
-//        doReturn("Diana").when(user).getFirstName();
-//        doReturn("Scholz").when(user).getLastName();
-//        doReturn(LocalDate.of(2002, 5, 6)).when(user).getDob();
-//        doReturn("diana_scholz_08_12@gmail.com").when(user).getEmail();
-//        doReturn("0812200621").when(user).getPassword();
-//        doReturn(UserRole.USER).when(user).getUserRole();
-//      doReturn(LocalDate.of(2020, 5, 7)).when(user).getCreationDate();
-//        doReturn(true).when(user).getLocked();
-//        doReturn(true).when(user).getEnabled();
-//
-//
-//        var result = underTest.transformEntity(user);
-//
-//        assertThat(result.getId()).isEqualTo(1L);
-//        assertThat(result.getFirstName()).isEqualTo("Diana");
-//        assertThat(result.getLastName()).isEqualTo("Scholz");
-//        assertThat(result.getDob()).isEqualTo(LocalDate.of(2002, 5, 6));
-//        assertThat(result.getEmail()).isEqualTo("diana_scholz_08_12@gmail.com");
-//        assertThat(result.getPassword()).isEqualTo("0812200621");
-//        assertThat(result.getUserRole()).isEqualTo(UserRole.USER);
-//        assertThat(result.getCreationDate()).isEqualTo(LocalDate.of(2020, 5, 7));
-//        assertThat(result.getLocked()).isEqualTo(true);
-//        assertThat(result.getEnabled()).isEqualTo(true);
-//
-//    }
 }
 
 
