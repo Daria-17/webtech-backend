@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Set;
 
-public interface PostRepository extends JpaRepository <PostEntity, Long> {
+public interface PostRepository extends JpaRepository <Post, Long> {
 
-    Set<PostEntity> findByUser(User user);
-    Set<PostEntity> findByTopic(Topic topic);
-    Set<PostEntity> findAllByOrderByCreationDateDesc();
+    Set<Post> findByUser(User user);
+    Set<Post> findByTopic(Topic topic);
+    Set<Post> findAllByOrderByCreationDateDesc();
 
 }

@@ -1,56 +1,63 @@
 package de.htw.webtechdemo.user;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@Entity(name = "users")
 @NoArgsConstructor
-@AllArgsConstructor
 public class User implements UserDetails {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
     private String lastName;
     private LocalDate dob;
-    private String username;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private LocalDate creationDate;
-    private boolean active;
-    private Boolean locked;
-    private Boolean enabled;
 
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
+    public User(String firstName, String lastName,  String email, String password,
+                      UserRole userRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userRole = userRole;
+        this.creationDate = LocalDate.now();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority(userRole.name());
+                new SimpleGrantedAuthority(UserRole.USER.name());
         return Collections.singletonList(authority);
     }
 
     @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return active;
+        return true;
     }
 
     @Override
@@ -60,13 +67,13 @@ public class User implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return active;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
         return enabled;
     }
-}
 
+}
 

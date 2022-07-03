@@ -10,47 +10,42 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Service
 public class TopicService {
 
-    private TopicRepository topicRepository;
+    private final TopicRepository topicRepository;
 
-    private SectionService sectionService;
+    private final SectionService sectionService;
 
-    private SectionRepository sectionRepository;
+    private final SectionRepository sectionRepository;
 
-    private UserService userService;
+    private final UserService userService;
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
 
 
     public List<Topic> findAll() {
-        List<TopicEntity> topics = topicRepository.findAll();
-        return topics.stream()
-                .map(this::transformEntity).collect(Collectors.toList());
+        return topicRepository.findAll();
     }
 
     public Topic findOne(Long id) {
-        var topicEntity = topicRepository.findById(id);
-        return topicEntity.map(this::transformEntity).orElse(null);
+        return topicRepository.findById(id).orElse(null);
     }
 
     public Set<Topic> findAllByOrderByCreationDateDesc() {
-        Set<Topic> topics = topicRepository.findAllByOrderByCreationDateDesc();
-        return topics;
+        return topicRepository.findAllByOrderByCreationDateDesc();
     }
 
     public Set<Topic> findBySection(String sectionName) {
-        Set<Topic> topics = topicRepository.findBySection(sectionRepository.getById(sectionRepository.findByName(sectionName).getId()));
-        return topics;
+        return topicRepository.findBySection(sectionRepository.getById(sectionRepository.findByName(sectionName).getId()));
     }
 
     public Topic save(TopicManipulationRequest request) {
 
-        var topicEntity = new TopicEntity(
+        var topic = new Topic(
                 userRepository.getById(request.getUser().getId()),
                 sectionRepository.getById(request.getSection().getId()),
                 request.getTitle(),
@@ -58,36 +53,23 @@ public class TopicService {
                 request.getCreationDate(),
                 request.getLastUpdateDate(),
                 request.isActive());
-        topicEntity = topicRepository.save(topicEntity);
-        return transformEntity(topicEntity);
+        topic = topicRepository.save(topic);
+        return topic;
     }
 
     public Set<Topic> findBySection(Long id) {
-        Set<Topic> topics = topicRepository.findBySection(sectionRepository.getById(id));
-        return topics;
+        return topicRepository.findBySection(sectionRepository.getById(id));
     }
 
     public Set<Topic> findByUser(User user) {
-        Set<Topic> topics = topicRepository.findByUser(userRepository.getById(user.getId()));
-        return topics;
+        return topicRepository.findByUser(userRepository.getById(user.getId()));
     }
 
     public void delete(Long id) {
         topicRepository.delete(topicRepository.getById(id));
     }
-    public void delete(TopicEntity topic) {
+    public void delete(Topic topic) {
         topicRepository.delete(topic);
     }
 
-    public Topic transformEntity(TopicEntity topicEntity){
-        return new Topic(
-                topicEntity.getId(),
-                userService.transformEntity(topicEntity.getUser()),
-                sectionService.transformEntity(topicEntity.getSection()),
-                topicEntity.getTitle(),
-                topicEntity.getContent(),
-                topicEntity.getCreationDate(),
-                topicEntity.getLastUpdateDate(),
-                topicEntity.isActive());
-    }
 }

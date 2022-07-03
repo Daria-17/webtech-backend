@@ -1,13 +1,17 @@
 package de.htw.webtechdemo.user;
 
+import de.htw.webtechdemo.registration.token.ConfirmationToken;
+import de.htw.webtechdemo.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +19,8 @@ public class UserService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found.";
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmationTokenService confirmationTokenService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -22,54 +28,76 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
+    public String singUpUser(User user) {
+        boolean userExists = userRepository.findByEmail(user.getEmail())
+                .isPresent();
+        if (userExists) {
+            throw new IllegalStateException("Email is already taken.");
+        }
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+
+        user.setPassword(encodedPassword);
+
+        userRepository.save(user);
+
+
+        String token = UUID.randomUUID().toString();
+        // TODO: Send Confirmation token
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                user
+        );
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+        // TODO: Send Email
+
+        return token;
+    }
+
+    public int enableUser(String email) {
+        return userRepository.enableUser(email);
+    }
+
     public List<User> findAll() {
-        List<UserEntity> users = userRepository.findAll();
-        return users.stream()
-                .map(this::transformEntity).collect(Collectors.toList());
+        return userRepository.findAll();
+
     }
 
     public User findById(Long id){
-        var userEntity = userRepository.findById(id);
-        return userEntity.map(this::transformEntity).orElse(null);
+        return userRepository.findById(id).orElse(null);
 
     }
 
     public User create(UserManipulationRequest request) {
-        var userEntity = new UserEntity(
+        var user = new User(
                 request.getFirstName(),
                 request.getLastName(),
-                request.getDob(),
-                request.getUsername(),
                 request.getEmail(),
                 request.getPassword(),
-                request.getUserRole(),
-                request.getCreationDate(),
-                request.isActive(),
-                request.getLocked(),
-                request.getEnabled()
+                request.getUserRole()
                 );
-        userEntity = userRepository.save(userEntity);
-        return transformEntity(userEntity);
+        userRepository.save(user);
+        return user;
     }
 
     public User update(Long id, UserManipulationRequest request){
-        var userEntityOptional = userRepository.findById(id);
-        if(userEntityOptional.isEmpty()){
+        var userOptional = userRepository.findById(id);
+        if(userOptional.isEmpty()){
             return null;
         }
-        var userEntity = userEntityOptional.get();
-        userEntity.setFirstName(request.getFirstName());
-        userEntity.setLastName(request.getLastName());
-        userEntity.setDob(request.getDob());
-        userEntity.setUsername(request.getUsername());
-        userEntity.setEmail(request.getEmail());
-        userEntity.setPassword(request.getPassword());
-        userEntity.setUserRole(request.getUserRole());
-        userEntity.setActive(request.isActive());
-        userEntity.setLocked(request.getLocked());
-        userEntity.setEnabled(request.getEnabled());
-        userEntity = userRepository.save(userEntity);
-        return transformEntity(userEntity);
+        var user = userOptional.get();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setDob(request.getDob());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setUserRole(request.getUserRole());
+        user.setLocked(request.getLocked());
+        user.setEnabled(request.getEnabled());
+        user= userRepository.save(user);
+        return user;
 
     }
     public boolean deleteById (Long id){
@@ -79,23 +107,4 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(id);
         return true;
     }
-
-    public User transformEntity(UserEntity userEntity) {
-        return new User(
-                userEntity.getId(),
-                userEntity.getFirstName(),
-                userEntity.getLastName(),
-                userEntity.getDob(),
-                userEntity.getUsername(),
-                userEntity.getEmail(),
-                userEntity.getPassword(),
-                userEntity.getUserRole(),
-                userEntity.getCreationDate(),
-                userEntity.isActive(),
-                userEntity.getLocked(),
-                userEntity.getEnabled()
-        );
-    }
-
-
 }

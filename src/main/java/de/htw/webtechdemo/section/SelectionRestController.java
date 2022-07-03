@@ -19,11 +19,11 @@ import java.util.Set;
 @RequestMapping("api/v1/sections")
 public class SelectionRestController {
 
-    private  SectionService sectionService;
+    private final SectionService sectionService;
 
-    private TopicService topicService;
+    private final TopicService topicService;
 
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("")
     @ResponseStatus(code = HttpStatus.OK)

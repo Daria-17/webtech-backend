@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -27,39 +26,28 @@ public class PostService {
     }
 
     public Post findOne(Long postId) {
-        var postEntity = postRepository.findById(postId);
-        return postEntity.map(this::transformEntity).orElse(null);
+        return postRepository.findById(postId).orElse(null);
     }
 
     public List<Post> findAll() {
-        List<PostEntity> posts = postRepository.findAll();
-        return posts.stream()
-                .map(this::transformEntity).collect(Collectors.toList());
+        return postRepository.findAll();
     }
 
     public Set<Post> findAllByOrderByCreationDateDesc(){
-        Set<PostEntity> posts = postRepository.findAllByOrderByCreationDateDesc();
 
-        return posts.stream()
-                .map(this::transformEntity).collect(Collectors.toSet());
+        return postRepository.findAllByOrderByCreationDateDesc();
     }
 
     public Set<Post> findByUser(User user) {
-        Set<PostEntity> posts = postRepository.findByUser(user);
-        return posts.stream()
-                .map(this::transformEntity).collect(Collectors.toSet());
+        return postRepository.findByUser(user);
     }
 
     public Set<Post> findByTopic(Topic topic) {
-        Set<PostEntity> posts = postRepository.findByTopic(topic);
-        return posts.stream()
-                .map(this::transformEntity).collect(Collectors.toSet());
+        return postRepository.findByTopic(topic);
     }
 
     public Set<Post> findByTopic(Long topicId) {
-        Set<PostEntity> posts = postRepository.findByTopic(topicService.findOne(topicId));
-        return posts.stream()
-                .map(this::transformEntity).collect(Collectors.toSet());
+        return postRepository.findByTopic(topicService.findOne(topicId));
     }
 
     public Post create(PostManipulationRequest request) {
@@ -73,16 +61,4 @@ public class PostService {
     public void delete(Post post) {
 
     }
-
-    private Post transformEntity(PostEntity postEntity){
-        return new Post(
-                postEntity.getId(),
-                topicService.transformEntity(postEntity.getTopicEntity()),
-                userService.transformEntity(postEntity.getUserEntity()),
-                postEntity.getContent(),
-                postEntity.getCreationDate(),
-                postEntity.getLastUpdateDate());
-    }
-
-
 }

@@ -2,21 +2,42 @@ package de.htw.webtechdemo.post;
 
 import de.htw.webtechdemo.topic.Topic;
 import de.htw.webtechdemo.user.User;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity(name = "posts")
 public class Post {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
     private Long id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     private Topic topic;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     private User user;
+
+    @Column(columnDefinition = "TEXT")
     private String content;
+
+    @Column(updatable = false, nullable = false)
     private LocalDate creationDate;
+
+    @Column(nullable = false)
     private LocalDate lastUpdateDate;
 
-    public Post(Long id, Topic topic, User user, String content, LocalDate creationDate, LocalDate lastUpdateDate) {
-        this.id = id;
+    public Post(Topic topic, User user, String content, LocalDate creationDate, LocalDate lastUpdateDate) {
         this.topic = topic;
         this.user = user;
         this.content = content;
@@ -24,72 +45,14 @@ public class Post {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public Post() {
-    }
-
+    @PrePersist
     protected void onCreate(){
         this.creationDate = LocalDate.now();
         this.lastUpdateDate = LocalDate.now();
     }
 
+    @PreUpdate
     protected void onUpdate(){
         this.lastUpdateDate = LocalDate.now();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public LocalDate getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(LocalDate lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Post post = (Post) o;
-        return Objects.equals(id, post.id) && Objects.equals(topic, post.topic) && Objects.equals(user, post.user) && Objects.equals(content, post.content) && Objects.equals(creationDate, post.creationDate) && Objects.equals(lastUpdateDate, post.lastUpdateDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, topic, user, content, creationDate, lastUpdateDate);
     }
 }
