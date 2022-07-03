@@ -11,7 +11,6 @@ public class TopicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -22,19 +21,19 @@ public class TopicEntity {
     @JoinColumn
     private SectionEntity section;
 
-    @Column(length = 80, name = "title")
+    @Column(length = 80)
     private String title;
 
-    @Column(columnDefinition = "TEXT", name = "content")
+    @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column(updatable = false, nullable = false, name = "creationDate")
+    @Column(updatable = false, nullable = false)
     private LocalDate creationDate;
 
-    @Column(nullable = false, name = "lastUpdateDate")
+    @Column(nullable = false)
     private LocalDate lastUpdateDate;
 
-    @Column(nullable = false, name = "active")
+    @Column(nullable = false)
     private boolean active;
 
     public TopicEntity(UserEntity user, SectionEntity section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {

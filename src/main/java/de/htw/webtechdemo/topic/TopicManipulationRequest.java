@@ -2,7 +2,6 @@ package de.htw.webtechdemo.topic;
 
 import de.htw.webtechdemo.section.Section;
 import de.htw.webtechdemo.user.User;
-import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDate;
 
