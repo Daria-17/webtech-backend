@@ -51,6 +51,10 @@ public class PostService {
         return postRepository.findById(post.getId());
     }
 
+    public void save(Post post) {
+        postRepository.save(post);
+    }
+
     public void delete(Long postId) {
         postRepository.deleteById(postId);
     }
