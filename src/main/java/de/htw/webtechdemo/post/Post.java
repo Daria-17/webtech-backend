@@ -37,12 +37,12 @@ public class Post {
     @Column(nullable = false)
     private LocalDate lastUpdateDate;
 
-    public Post(Topic topic, User user, String content, LocalDate creationDate, LocalDate lastUpdateDate) {
+    public Post(Topic topic, User user, String content) {
         this.topic = topic;
         this.user = user;
         this.content = content;
-        this.creationDate = creationDate;
-        this.lastUpdateDate = lastUpdateDate;
+        this.creationDate = LocalDate.now();
+        this.lastUpdateDate = LocalDate.now();
     }
 
     @PrePersist

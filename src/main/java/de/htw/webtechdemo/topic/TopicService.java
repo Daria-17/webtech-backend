@@ -2,7 +2,6 @@ package de.htw.webtechdemo.topic;
 
 import de.htw.webtechdemo.user.User;
 import de.htw.webtechdemo.user.UserRepository;
-import de.htw.webtechdemo.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,6 @@ import java.util.Set;
 public class TopicService {
 
     private final TopicRepository topicRepository;
-    private final UserService userService;
     private final UserRepository userRepository;
 
     public Page<Topic> findAll(Pageable pagination) {
@@ -36,7 +34,7 @@ public class TopicService {
 
     public Topic save(TopicManipulationRequest request) {
         var topic = new Topic(
-                userRepository.getById(request.getUser().getId()),
+                userRepository.getById(request.getUserId()),
                 request.getTitle(),
                 request.getContent());
         topic = topicRepository.save(topic);
@@ -60,7 +58,7 @@ public class TopicService {
 
     public Optional<Topic> create(TopicManipulationRequest request) {
         Topic topic = new Topic(
-                request.getUser(),
+                userRepository.getById(request.getUserId()),
                 request.getTitle(),
                 request.getContent()
         );
@@ -74,7 +72,7 @@ public class TopicService {
         topic.setLastUpdateDate(LocalDate.now());
         topic.setTitle(request.getTitle());
         topic.setContent(request.getContent());
-        topic.setUser(request.getUser());
+        topic.setUser(userRepository.getById(request.getUserId()));
         topicRepository.save(topic);
         return topicRepository.findById(id);
     }

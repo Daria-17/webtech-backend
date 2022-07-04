@@ -1,26 +1,28 @@
 package de.htw.webtechdemo.topic;
 
-import de.htw.webtechdemo.user.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class TopicManipulationRequest {
 
-    private User user;
+
+    private Long userId;
     private String title;
     private String content;
     private LocalDate lastUpdateDate;
     private boolean active;
 
-    public TopicManipulationRequest(User user,
+    public TopicManipulationRequest(Long userId,
                                     String title,
                                     String content,
                                     boolean active) {
-        this.user = user;
+        this.userId = userId;
         this.title = title;
         this.content = content;
         this.lastUpdateDate = LocalDate.now();
