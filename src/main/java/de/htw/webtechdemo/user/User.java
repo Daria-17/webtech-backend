@@ -3,24 +3,19 @@ package de.htw.webtechdemo.user;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
 
 @Getter
 @Setter
 @Entity(name = "users")
 @NoArgsConstructor
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private LocalDate dob;
@@ -42,7 +37,7 @@ public class User implements UserDetails {
         this.userRole = userRole;
         this.creationDate = LocalDate.now();
     }
-
+/*
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
@@ -74,6 +69,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
-
+*/
 }
 

@@ -2,6 +2,7 @@ package de.htw.webtechdemo.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserManipulationRequest {
 
     private String firstName;
@@ -19,7 +21,6 @@ public class UserManipulationRequest {
     private String password;
     private UserRole userRole;
     private LocalDate creationDate;
-    private boolean active;
     private Boolean locked;
     private Boolean enabled;
 

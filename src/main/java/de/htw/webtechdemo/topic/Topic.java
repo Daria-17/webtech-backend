@@ -1,6 +1,5 @@
 package de.htw.webtechdemo.topic;
 
-import de.htw.webtechdemo.section.Section;
 import de.htw.webtechdemo.user.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,10 +19,6 @@ public class Topic {
     @JoinColumn
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private Section section;
-
     @Column(length = 80)
     private String title;
 
@@ -39,14 +34,13 @@ public class Topic {
     @Column(nullable = false)
     private boolean active;
 
-    public Topic(User user, Section section, String title, String content, LocalDate creationDate, LocalDate lastUpdateDate, boolean active) {
+    public Topic(User user, String title, String content) {
         this.user = user;
-        this.section = section;
         this.title = title;
         this.content = content;
-        this.creationDate = creationDate;
-        this.lastUpdateDate = lastUpdateDate;
-        this.active = active;
+        this.creationDate = LocalDate.now();
+        this.lastUpdateDate = LocalDate.now();
+        this.active = true;
     }
 
     protected Topic() {}
